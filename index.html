@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teste API Previsão</title>
+</head>
+<body>
+  <h1>Testar Previsão de Demanda</h1>
+  <button onclick="chamarApi()">Executar</button>
+  <pre id="resposta"></pre>
+
+  <script>
+    async function chamarApi() {
+      const resposta = await fetch("http://127.0.0.1:5000/api/prever", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id_produto: 237497,
+          arquivo_csv: "dados_vendas_sinteticos.csv"
+        })
+      });
+
+      const dados = await resposta.json();
+      document.getElementById("resposta").innerText = JSON.stringify(dados, null, 2);
+    }
+  </script>
+</body>
+</html>
